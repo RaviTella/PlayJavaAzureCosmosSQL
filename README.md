@@ -54,9 +54,9 @@ In Play framework, action code must be non-blocking. So, the action must return 
         httpExecutionContext.current());
   }
 ```
-Check out the source code for the Play Scala version of the appliation at [PlayScala App](https://github.com/RaviTella/PlayScalaReadingListApp)
+Check out the source code for the Play Scala version of the appliation at [PlayScala App](https://github.com/RaviTella/PlayScalaReadingListApp). This app will require either CosmosDB Mongo API or Mongo DB
   
-Check out the source code for the Spring Boot Web Flux version of the appliation at [SpringBoot WebFlux App](https://github.com/RaviTella/SpringBootWebFlux)
+Check out the source code for the Spring Boot Web Flux version of the appliation at [SpringBoot WebFlux App](https://github.com/RaviTella/SpringBootWebFlux). This app will require either CosmosDB Mongo API or Mongo DB
 
 
 
