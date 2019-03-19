@@ -1,0 +1,129 @@
+@(recommendations: List[model.Recommendation], books: List[model.Book])
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+
+    <title>Reading List</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/thumbnail-gallery.css")'/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Reading List Demo Application</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <p class="navbar-text pull-right" style="font-size:20px">Play + Java + Cosmos SQL</p>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+<!-- Page Content -->
+<div class="container">
+    @if(books.isEmpty){
+    <div class="row">
+        <h2 class="text-center">You have no books in your book list!</h2>
+    </div>
+    } else {
+    <div class="row">
+        <div class="container">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="col-xs-1 text-center">Title</th>
+                    <th class="col-xs-1 text-center">Author</th>
+                    <th class="col-xs-1 text-center">ISBN</th>
+                    <th class="col-xs-1 text-center">Description</th>
+                    <th class="col-xs-1 text-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                @for(book <- books) {
+                <tr>
+                    <td class="text-center">@book.title</td>
+                    <td class="text-center">@book.author</td>
+                    <td class="text-center">@book.isbn</td>
+                    <td class="text-center">@book.description</td>
+                    <td class="text-center">
+                        <div class="btn-group btn-group-justified">
+                            <a href="@routes.HomeController.get(book.id)"
+                               class="btn btn-warning .btn-sm" role="button"> <span
+                                    class="glyphicon glyphicon-edit"></span>Edit
+                            </a> <a href="@routes.HomeController.delete(book.id)"
+                                    class="btn btn-danger .btn-sm" role="button"><span
+                                class="glyphicon glyphicon-remove-sign"></span> Remove</a>
+                        </div>
+                    </td>
+                </tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    }
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <h3 class="page-header">Recommendations</h3>
+        </div>
+
+        @for(recommendation <- recommendations) {
+        <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+
+            @helper.form(action=routes.HomeController.add, 'id ->"selectedRecommendationForm") {
+            <a class="thumbnail" href="#" onclick="parentNode.submit()">
+                <img class="img-responsive" src="@recommendation.imageURL" alt=""></img>
+                <input type="hidden" value="@recommendation.title" id="title" name="title"/>
+                <input type="hidden" value="@recommendation.author" id="author" name="author"/>
+                <input type="hidden" value="@recommendation.isbn" id="isbn" name="isbn"/>
+                <input type="hidden" value="@recommendation.description" id="description" name="description"/>
+            </a>
+            }
+        </div>
+        }
+    </div>
+
+    <hr></hr>
+
+    <!-- Footer -->
+    <footer>
+        <div class="row">
+            <div class="col-lg-12">
+                <p></p>
+            </div>
+        </div>
+    </footer>
+
+</div>
+<!-- /.container -->
+</body>
+</html>

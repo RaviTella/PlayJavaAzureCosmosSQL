@@ -1,0 +1,19 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+
+GET     /                           controllers.HomeController.index
+
+GET     /get/:id                   controllers.HomeController.get(id: String)
+
+GET     /delete/:id                 controllers.HomeController.delete(id: String)
+
+POST    /add                        controllers.HomeController.add
+
+POST   /update                      controllers.HomeController.update
+
+GET  /cancel                        controllers.HomeController.cancel
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
