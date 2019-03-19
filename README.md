@@ -29,6 +29,33 @@ Specifically, the following capabilities are demonstrated:
 * Access the WebApp at http://localhost:9000/
 
 # Highlights
+CosmosDB Async Java SDK natively supports RxJava Observable but Java Play framework controller actions need CompletableFuture.The following function will convert a Observable to CompletableFuture
+```
+  private <T> CompletableFuture<T> toCompletableFuture(Observable<T> observable) {
+    CompletableFuture<T> cf = new CompletableFuture();
+    observable.single().subscribe(l -> cf.complete(l), l -> cf.completeExceptionally(l));
+    return cf;
+  }
+```
+
+In Play frameworks, action code must be non-blocking. So, the action must return a promise of the result immediately upon invocation. In java that would be an object of type CompletionStage.  The following action function demonstrates combining two independent futures using thenCombine() and returning a CompletionStage<Result> which will eventually be redeemed by the view.
+```
+  public CompletionStage<Result> index() {
+    CompletionStage<WSResponse> request = ws.url(config.getString("externalRestServices.recommendationService")).get();
+    CompletableFuture<List<Document>> booksCF = dao.getReadersReadingListCompletableFuture("Tella");
+    return request.thenCombineAsync(
+        booksCF,
+        (recommendations, books) -> {
+          return ok(
+              views.html.readingList.render(
+                  convertToRecommendations(recommendations.asJson().toString()),
+                  convertToBooks(books.toString())));
+        },
+        httpExecutionContext.current());
+  }
+```
+
+
 
 
 
