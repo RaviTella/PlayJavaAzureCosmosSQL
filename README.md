@@ -7,7 +7,8 @@ Specifically, the following capabilities are demonstrated:
 * Play 2.6 - Routing, Twirl templates, forms, Dependency Injection etc
 * Akka HTTP server backend
 * Calling REST APIs with Play WS
-* Using Cosmos DB Mongo API from Reactive Scala Driver
+* Azure CosmosDB SQL API
+* CosmosDB Async Java SDK
 * RXJava Observable to CompletableFuture
 
 # Getting started
@@ -18,7 +19,7 @@ Specifically, the following capabilities are demonstrated:
  * Create a Cosmos DB collection for SQL API
 
 ## Then:
-* Update the following properties in application.cong for PlayJavaReadingListWebApp 
+* Update the following properties in application.cong for PlayJavaReadingListWebApp with your Cosmos DB connection information
   - endPoint
   - key
   - dataBase
@@ -26,6 +27,8 @@ Specifically, the following capabilities are demonstrated:
 * sbt "run 9001" - from PlayJavaRecommendationService the to start the REST API 
 * sbt run - from PlayJavaReadingListWebApp to start the Web Application
 * Access the WebApp at http://localhost:9000/
+
+# Highlights
 
 
 
