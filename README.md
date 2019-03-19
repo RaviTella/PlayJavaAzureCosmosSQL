@@ -38,7 +38,7 @@ CosmosDB Async Java SDK natively supports RxJava Observable but Java Play framew
   }
 ```
 
-In Play frameworks, action code must be non-blocking. So, the action must return a promise of the result immediately upon invocation. In java that would be an object of type CompletionStage.  The following action function demonstrates combining two independent futures using thenCombine() and returning a CompletionStage<Result> which will eventually be redeemed by the view.
+In Play framework, action code must be non-blocking. So, the action must return a promise of the result immediately upon invocation. In java that would be an object of type CompletionStage.  The following action function demonstrates combining two independent futures using thenCombine() and returning a CompletionStage<Result> which will eventually be redeemed by the view.
 ```
   public CompletionStage<Result> index() {
     CompletionStage<WSResponse> request = ws.url(config.getString("externalRestServices.recommendationService")).get();
@@ -54,6 +54,9 @@ In Play frameworks, action code must be non-blocking. So, the action must return
         httpExecutionContext.current());
   }
 ```
+Check out the source code for the Play Scala version of the appliation at [PlayScala App](https://github.com/RaviTella/PlayScalaReadingListApp)
+  
+Check out the source code for the Spring Boot Web Flux version of the appliation at [SpringBoot WebFlux App](https://github.com/RaviTella/SpringBootWebFlux)
 
 
 
