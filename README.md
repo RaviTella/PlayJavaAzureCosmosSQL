@@ -16,7 +16,7 @@ Specifically, the following capabilities are demonstrated:
 ## First:
  * Java 8
  * sbt
- * Create a Cosmos DB collection for SQL API
+ * Create a Cosmos DB collection for SQL API. Use "/reader" as the partition key.
 
 ## Then:
 * Update the following properties in application.cong for PlayJavaReadingListWebApp with your Cosmos DB connection information
