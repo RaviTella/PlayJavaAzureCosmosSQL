@@ -44,9 +44,9 @@ public class HomeController extends Controller {
   }
 
   public CompletionStage<Result> index() {
-    CompletionStage<WSResponse> request = ws.url(config.getString("externalRestServices.recommendationService")).get();
+    CompletionStage<WSResponse> recommendationsCF = ws.url(config.getString("externalRestServices.recommendationService")).get();
     CompletableFuture<List<Document>> booksCF = dao.getReadersReadingListCompletableFuture("Tella");
-    return request.thenCombineAsync(
+    return recommendationsCF.thenCombineAsync(
         booksCF,
         (recommendations, books) -> {
           return ok(
